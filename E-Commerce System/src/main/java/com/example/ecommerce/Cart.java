@@ -5,17 +5,18 @@ import java.util.ArrayList;
 public class Cart {
     private ArrayList<Pair<Product, Integer>> products = new ArrayList<>();
 
-    public void addToCart(Product product, int quantity) throws Exception {
-        if (quantity <= 0) throw new Exception("Quantity must be positive");
-
-        if (product.hasExpired()) {
-            System.out.println("We are sorry, " + product.getName() + " is expired!");
+    public void addToCart(Product product, int quantity) throws ItemExpiredException, OutOfStockException {
+        if (quantity <= 0){
+            System.out.println("Quantity must be positive!");
             return;
         }
 
+        if (product.hasExpired()) {
+            throw new ItemExpiredException("We are sorry, " + product.getName() + " is expired!");
+        }
+
         if(quantity > product.getQuantity()){
-            System.out.println("There's no sufficient" + product.getName() + " quantity in our stock!");
-            return;
+            throw new OutOfStockException("There's no sufficient" + product.getName() + " quantity in our stock!");
         }
 
         for (Pair<Product,Integer> item : products) {

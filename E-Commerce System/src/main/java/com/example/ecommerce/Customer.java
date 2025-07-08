@@ -49,13 +49,11 @@ public class Customer {
         System.out.println("ID: " + this.getCustomerID() + "\nName: " + this.getName() + "\nBalance: " + this.getBalance());
     }
 
-    public void checkout(Customer customer, Cart cart){
+    public void checkout(Customer customer, Cart cart) throws Exception {
         Scanner in = new Scanner(System.in);
 
         if(cart.getProducts().isEmpty()){
-            System.out.println("Your cart is Empty!");
-            System.out.println("===========================================\n");
-            return;
+            throw new EmptyCartException("Your cart is Empty!");
         }
 
         System.out.println("          Welcome to checkout :)          ");
@@ -78,8 +76,7 @@ public class Customer {
 
         if(total > customer.getBalance()){
             cart.clearCart();
-            System.out.println("You have insufficient balance, we can't proceed with the checkout!\nWe hope to hear from you again.");
-            return;
+            throw new InsufficientBalanceException("You have insufficient balance, we can't proceed with the checkout!");
         }
 
         System.out.println("========================================");

@@ -47,19 +47,39 @@ public class Main{
                     int quantity = in.nextInt();
                     switch (order){
                         case 1:
-                            cart.addToCart(cheese, quantity);
+                            try {
+                                cart.addToCart(cheese, quantity);
+                            }catch (ItemExpiredException | OutOfStockException e){
+                                System.out.println(e.getMessage());
+                            }
                             break;
                         case 2:
-                            cart.addToCart(biscuits, quantity);
+                            try {
+                                cart.addToCart(biscuits, quantity);
+                            }catch (ItemExpiredException | OutOfStockException e){
+                                System.out.println(e.getMessage());
+                            }
                             break;
                         case 3:
-                            cart.addToCart(tv, quantity);
+                            try {
+                                cart.addToCart(tv, quantity);
+                            }catch (ItemExpiredException | OutOfStockException e){
+                                System.out.println(e.getMessage());
+                            }
                             break;
                         case 4:
-                            cart.addToCart(mobile, quantity);
+                            try {
+                                cart.addToCart(mobile, quantity);
+                            }catch (ItemExpiredException | OutOfStockException e){
+                                System.out.println(e.getMessage());
+                            }
                             break;
                         case 5:
-                            cart.addToCart(mobileScratchScreen, quantity);
+                            try {
+                                cart.addToCart(mobileScratchScreen, quantity);
+                            }catch (ItemExpiredException | OutOfStockException e){
+                                System.out.println(e.getMessage());
+                            }
                             break;
                         default:
                             System.out.println("Invalid Input!");
@@ -72,7 +92,11 @@ public class Main{
                     System.out.println("===========================================\n");
                     break;
                 case 5:
-                    customer.checkout(customer, cart);
+                    try {
+                        customer.checkout(customer, cart);
+                    }catch (EmptyCartException | InsufficientBalanceException e){
+                        System.out.println(e.getMessage());
+                    }
                     System.out.println("===========================================\n");
                     break;
                 case 6:
